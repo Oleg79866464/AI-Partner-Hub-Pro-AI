@@ -14,7 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   };
 
   const categories = [...new Set((data ?? []).map((tool) => tool.category))].map((category) => ({
-    url: `${siteUrl}/?category=${encodeURIComponent(category)}`,
+    url: `${siteUrl}/categories/${encodeURIComponent(category.toLowerCase().replace(/ё/g, 'е').replace(/[^a-z0-9а-я]+/gi, '-').replace(/^-+|-+$/g, ''))}`,
     lastModified,
     priority: 0.8,
     changeFrequency: 'weekly' as const,
