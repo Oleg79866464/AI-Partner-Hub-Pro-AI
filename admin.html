@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Tools Market Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-slate-50 text-slate-900">
+    <main class="mx-auto min-h-screen max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <div id="protectedView" class="hidden">
+        <header class="mb-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <p class="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-700">Admin panel</p>
+          <h1 class="mt-2 text-3xl font-black">Статистика каталога AI-инструментов</h1>
+          <p class="mt-2 text-slate-600">Пароль защищает доступ к аналитике и экспорту.</p>
+        </header>
+
+        <section class="grid gap-4 md:grid-cols-4" id="metrics"></section>
+
+        <section class="mt-8 grid gap-6 lg:grid-cols-[1fr_320px]">
+          <div class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+              <h2 class="text-xl font-bold">Инструменты по кликам</h2>
+              <div class="flex gap-2">
+                <button id="exportJsonBtn" class="rounded-2xl bg-slate-950 px-4 py-2 text-sm font-semibold text-white">Экспорт JSON</button>
+                <button id="exportCsvBtn" class="rounded-2xl bg-cyan-600 px-4 py-2 text-sm font-semibold text-white">Экспорт CSV</button>
+              </div>
+            </div>
+            <div class="overflow-hidden rounded-2xl border border-slate-200">
+              <table class="min-w-full divide-y divide-slate-200 text-sm">
+                <thead class="bg-slate-50 text-left text-slate-500">
+                  <tr>
+                    <th class="px-4 py-3">Название</th>
+                    <th class="px-4 py-3">Категория</th>
+                    <th class="px-4 py-3">Цена</th>
+                    <th class="px-4 py-3">Клики</th>
+                    <th class="px-4 py-3">Доход</th>
+                  </tr>
+                </thead>
+                <tbody id="toolsTable" class="divide-y divide-slate-100 bg-white"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <aside class="space-y-4">
+            <div class="rounded-3xl border border-slate-200 bg-slate-950 p-5 text-white shadow-lg">
+              <p class="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-300">Formula</p>
+              <p class="mt-2 text-lg font-bold">Почему $0.05/клик — мёртвая модель</p>
+              <p class="mt-2 text-sm leading-6 text-slate-300">Мы считаем RevShare: клики × 0.15 × $29 × commission rate. Это ближе к реальной экономике подписочных SaaS.</p>
+            </div>
+            <div class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+              <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Доверие</p>
+              <p class="mt-2 text-lg font-bold">Топ-10 подсвечены</p>
+              <p class="mt-2 text-sm leading-6 text-slate-600">Самые кликабельные инструменты выделяются в таблице и помогают быстро найти лидеров каталога.</p>
+            </div>
+          </aside>
+        </section>
+      </div>
+
+      <div id="loginView" class="mx-auto max-w-md rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+        <p class="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-700">Protected access</p>
+        <h1 class="mt-2 text-2xl font-black">Введите пароль администратора</h1>
+        <p class="mt-2 text-slate-600">Доступ откроется после ввода <code class="rounded bg-slate-100 px-2 py-1">admin123</code>.</p>
+      </div>
+    </main>
+
+    <script>
+      const ADMIN_PASSWORD = 'admin123';
+      let tools = [];
+      let clicks = JSON.parse(localStorage.getItem('ai_tools_clicks') || '[]');
+
+      const loginView = document.getElementById('loginView');
+      const protectedView = document.getElementById('protectedView');
+      const metrics = document.getElementById('metrics');
+      const toolsTable = document.getElementById('toolsTable');
+      const exportJsonBtn = document.getElementById('exportJsonBtn');
+      const exportCsvBtn = document.getElementById('exportCsvBtn');
+
+      function requirePassword() {
+        const input = prompt('Введите пароль администратора');
+        if (input !== ADMIN_PASSWORD) {
+          alert('Неверный пароль');
+          return false;
+        }
+        return true;
+      }
+
+      function getClicksForTool(id) {
+        return clicks.filter((click) => click.tool_id === id).length;
+      }
+
+      function money(value) {
+        return `$${value.toFixed(2)}`;
+      }
+
+      function renderMetrics() {
+        const totalClicks = clicks.length;
+        const projectedRevenue = totalClicks * 0.15 * 29;
+        const revenuePerClick = totalClicks > 0 ? projectedRevenue / totalClicks : 0;
+        const cards = [
+          { label: 'Всего кликов', value: totalClicks },
+          { label: 'Инструментов в базе', value: tools.length },
+          { label: 'Прогноз дохода', value: money(projectedRevenue) },
+          { label: 'Доход за клик', value: money(revenuePerClick) },
+        ];
+        metrics.innerHTML = cards.map((card) => `
+          <div class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+            <p class="text-sm text-slate-500">${card.label}</p>
+            <p class="mt-2 text-2xl font-black text-slate-950">${card.value}</p>
+          </div>
+        `).join('');
+      }
+
+      function renderTable() {
+        const sorted = [...tools].sort((a, b) => getClicksForTool(b.id) - getClicksForTool(a.id));
+        toolsTable.innerHTML = sorted.map((tool, index) => {
+          const toolClicks = getClicksForTool(tool.id);
+          const revenue = toolClicks * 0.15 * 29;
+          const topClass = index < 10 ? 'bg-amber-50' : '';
+          return `
+            <tr class="${topClass}">
+              <td class="px-4 py-3 font-semibold text-slate-900">${tool.name}</td>
+              <td class="px-4 py-3 text-slate-600">${tool.category}</td>
+              <td class="px-4 py-3 text-slate-600">${tool.pricing}</td>
+              <td class="px-4 py-3 font-semibold">${toolClicks}</td>
+              <td class="px-4 py-3 font-semibold">${money(revenue)}</td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      function downloadFile(filename, content, mimeType) {
+        const blob = new Blob([content], { type: mimeType });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = filename;
+        link.click();
+        URL.revokeObjectURL(url);
+      }
+
+      async function init() {
+        if (!requirePassword()) return;
+        loginView.classList.add('hidden');
+        protectedView.classList.remove('hidden');
+
+        try {
+          const response = await fetch('ai-tools-clean.json', { cache: 'no-store' });
+          if (!response.ok) throw new Error('Не удалось загрузить ai-tools-clean.json');
+          tools = await response.json();
+          clicks = JSON.parse(localStorage.getItem('ai_tools_clicks') || '[]');
+          renderMetrics();
+          renderTable();
+        } catch (error) {
+          protectedView.innerHTML = `<div class="rounded-3xl border border-red-200 bg-red-50 p-6 text-red-700">${error.message}</div>`;
+        }
+      }
+
+      exportJsonBtn.addEventListener('click', async () => {
+        const response = await fetch('ai-tools-clean.json', { cache: 'no-store' });
+        const data = await response.text();
+        downloadFile('ai-tools-clean.json', data, 'application/json;charset=utf-8');
+      });
+
+      exportCsvBtn.addEventListener('click', () => {
+        const rows = [
+          ['tool_id', 'timestamp'],
+          ...clicks.map((click) => [click.tool_id, click.timestamp]),
+        ];
+        const csv = rows.map((row) => row.map((value) => `"${String(value).replaceAll('"', '""')}"`).join(',')).join('\n');
+        downloadFile('ai-tools-clicks.csv', csv, 'text/csv;charset=utf-8');
+      });
+
+      init();
+    </script>
+  </body>
+</html>
