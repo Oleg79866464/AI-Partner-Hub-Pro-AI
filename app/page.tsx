@@ -14,7 +14,7 @@ export async function generateMetadata({ searchParams }: { searchParams: SearchP
   const suffix = [search, category, pricing].filter(Boolean).join(' • ');
   const title = suffix ? `${suffix} | ${titleBase}` : titleBase;
   const description =
-    'Проверенные ИИ-инструменты для создания контента, SEO и performance-маркетинга. Найдите нейросети для текста, видео, изображений и аналитики с фильтрами по цене и категории.';
+    'Проверенные ИИ-инструменты для маркетинга, контента и SEO: генераторы текста, видео, изображений, аналитика и автоматизация с фильтрами по цене, категории и поисковому intent.';
 
   return {
     title,
@@ -82,15 +82,17 @@ export default async function Home({ searchParams }: { searchParams: SearchParam
                 <span className="h-2 w-2 rounded-full bg-cyan-500" />
                 AI Catalog RU • каталог нейросетей для маркетинга
               </div>
-              <h1 className="mt-5 max-w-3xl text-4xl font-black tracking-tight sm:text-5xl lg:text-6xl">Найти ИИ-инструмент для маркетинга и контента</h1>
+              <h1 className="mt-5 max-w-3xl text-4xl font-black tracking-tight sm:text-5xl lg:text-6xl">Лучшие нейросети для маркетинга, SEO и контента</h1>
               <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">
-                Каталог проверенных нейросетей для текста, видео, изображений, SEO, аналитики и автоматизации контента. Подборки для маркетологов, копирайтеров, SMM-специалистов и блогеров, которым важен ROI.
+                Каталог проверенных нейросетей для текста, видео, изображений, SEO, аналитики и автоматизации контента. Подборки для маркетологов, копирайтеров, SMM-специалистов и блогеров, которые ищут AI-сервисы с понятной окупаемостью, подписками $15–99/мес и реальной ценностью для роста.
               </p>
               <div className="mt-8 flex flex-wrap gap-3 text-sm text-slate-700">
                 <span className="rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-slate-200">Партнёрские скидки</span>
                 <span className="rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-slate-200">Проверенные инструменты</span>
                 <span className="rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-slate-200">SEO + Performance</span>
+                <span className="rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-slate-200">AI для контента и трафика</span>
                 <span className="rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-slate-200">RevShare вместо CPC</span>
+                <span className="rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-slate-200">Нейросети для маркетолога</span>
               </div>
               <div className="mt-8 grid gap-4 sm:grid-cols-3">
                 <div className="rounded-3xl border border-slate-200 bg-slate-950 p-5 text-white shadow-lg shadow-slate-950/20">
@@ -115,10 +117,10 @@ export default async function Home({ searchParams }: { searchParams: SearchParam
               <p className="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-300">Premium stack</p>
               <h2 className="mt-3 text-2xl font-bold">Инструменты, которые продают подписки</h2>
               <ul className="mt-6 space-y-4 text-sm leading-6 text-slate-300">
-                <li>• Трафик из SEO под реальные запросы: «нейросети для маркетинга», «ИИ для копирайтинга», «AI для SMM».</li>
-                <li>• Фокус на RevShare-модели и подписках $15–99/мес.</li>
-                <li>• Трекинг кликов и UTM для оценки эффективности по каждому инструменту.</li>
-                <li>• Подборки для текста, видео, изображений, аналитики и SEO.</li>
+                <li>• Трафик из SEO под реальные запросы: «нейросети для маркетинга», «ИИ для копирайтинга», «AI для SMM», «лучшие AI-инструменты для контента».</li>
+                <li>• Фокус на RevShare-модели и подписках $15–99/мес, а не на устаревшем CPC.</li>
+                <li>• Трекинг кликов и UTM для оценки эффективности по каждому инструменту, категории и ключу.</li>
+                <li>• Подборки для текста, видео, изображений, аналитики, SEO и контент-воронок.</li>
               </ul>
               <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-4">
                 <p className="text-xs uppercase tracking-[0.24em] text-slate-400">Главный CTA</p>

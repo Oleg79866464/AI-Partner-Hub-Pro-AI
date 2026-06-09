@@ -40,6 +40,7 @@ def main() -> int:
     cli.add_argument('--errors', default='parsing_errors.json', help='Parsing errors file')
     cli.add_argument('--import', dest='do_import', action='store_true', help='Import cleaned rows into Supabase')
     cli.add_argument('--auto', action='store_true', help='Run parse + export + import in one command')
+    cli.add_argument('--seed', action='store_true', help='Parse and generate the SQL seed file automatically')
     cli.add_argument('--dry-run', action='store_true', help='Parse and print summary only')
     args = cli.parse_args()
 
@@ -53,6 +54,8 @@ def main() -> int:
     print(f'Clean tools: {len(clean_rows)}')
     if args.dry_run:
         return 0
+    if args.seed:
+        print(f'Seed file ready: {args.output}')
     if args.do_import or args.auto:
         return import_rows(clean_rows)
     return 0
