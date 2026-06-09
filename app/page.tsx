@@ -155,8 +155,27 @@ export default async function Home({ searchParams }: { searchParams: SearchParam
 
         {error ? <p className="mt-6 rounded-2xl bg-red-50 p-4 text-sm text-red-700">{error.message}</p> : null}
 
-        <section id="catalog" className="mt-10 space-y-5">
+        <section className="mt-10 rounded-[1.75rem] border border-slate-200/80 bg-white/90 p-5 shadow-[0_20px_60px_-20px_rgba(15,23,42,0.12)] backdrop-blur">
           <div className="grid gap-4 md:grid-cols-3">
+            <div className="rounded-3xl border border-cyan-100 bg-cyan-50 p-5">
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-700">Trust</p>
+              <p className="mt-2 text-xl font-bold text-slate-950">Проверенные карточки</p>
+              <p className="mt-1 text-sm text-slate-600">Публикуем только инструменты с понятным value prop, ценой и каналом монетизации.</p>
+            </div>
+            <div className="rounded-3xl border border-amber-100 bg-amber-50 p-5">
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-amber-700">Benefits</p>
+              <p className="mt-2 text-xl font-bold text-slate-950">Сильный intent match</p>
+              <p className="mt-1 text-sm text-slate-600">Категории и SEO-лендинги собраны под запросы маркетологов, копирайтеров и SMM.</p>
+            </div>
+            <div className="rounded-3xl border border-emerald-100 bg-emerald-50 p-5">
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-emerald-700">Revenue</p>
+              <p className="mt-2 text-xl font-bold text-slate-950">RevShare-first модель</p>
+              <p className="mt-1 text-sm text-slate-600">Ставим партнёрские продукты и commission rate выше кликового мусора.</p>
+            </div>
+          </div>
+
+          <div id="catalog" className="mt-8 space-y-5">
+            <div className="grid gap-4 md:grid-cols-3">
             <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm"><p className="text-sm text-slate-500">Сейчас в каталоге</p><p className="mt-2 text-2xl font-bold">{tools.length}</p><p className="mt-1 text-sm text-slate-600">инструментов для роста контента</p></div>
             <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm"><p className="text-sm text-slate-500">Фокус</p><p className="mt-2 text-2xl font-bold">SEO + AI</p><p className="mt-1 text-sm text-slate-600">поиск, тексты, видео, креатив</p></div>
             <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm"><p className="text-sm text-slate-500">Монетизация</p><p className="mt-2 text-2xl font-bold">RevShare</p><p className="mt-1 text-sm text-slate-600">а не устаревший CPC</p></div>

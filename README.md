@@ -21,33 +21,33 @@ Copy `.env.example` to `.env.local` and fill in:
 
 ## Deployment steps
 
-### 1. Parser
-```bash
-cd parser
-python3.11 -m venv venv
-source venv/bin/activate
-pip install pydantic==2.5.3 requests==2.31.0 beautifulsoup4==4.12.3
-python parser.py
-```
-
-The parser reads `taaft.json`, validates tools, writes `tools_clean.json`, and logs parsing issues to `parsing_errors.json`.
-
-To import the cleaned data into Supabase, run:
-
+### 1. Parser + seed workflow
 ```bash
 cd parser
 python3.11 -m venv venv
 source venv/bin/activate
 pip install pydantic==2.5.3 requests==2.31.0 beautifulsoup4==4.12.3 supabase==2.6.0
-python cli.py --input taaft.json --output tools_clean.json --errors parsing_errors.json --auto
+python cli.py --input taaft.json --output tools_clean.json --errors parsing_errors.json --sql-seed --apply-sql
 ```
+
+What this does:
+- parses `taaft.json`
+- validates and cleans tools
+- writes `tools_clean.json`
+- generates `tools_clean.sql`
+- applies the SQL seed directly to Supabase via `psql` when `SUPABASE_DB_URL` is set
 
 ### 2. Supabase
 1. Create a Supabase project.
 2. Open the SQL editor.
 3. Run `db/schema.sql`.
-4. Run the fully automatic workflow:
-   `python parser/cli.py --input taaft.json --output tools_clean.json --errors parsing_errors.json --auto`
+4. Copy `.env.example` to `.env.local` and set `SUPABASE_DB_URL` if you want one-command SQL seeding.
+
+If you prefer the Supabase SDK import path instead, use:
+```bash
+cd parser
+python cli.py --input taaft.json --output tools_clean.json --errors parsing_errors.json --auto
+```
 
 ### 3. Next.js
 ```bash
