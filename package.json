@@ -1,0 +1,10 @@
+{
+  "name": "ai-partner-hub-pro-ai",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "echo \"Project scaffold ready\"",
+    "build": "echo \"No build step yet\"",
+    "lint": "echo \"No lint configuration yet\""
+  }
+}
