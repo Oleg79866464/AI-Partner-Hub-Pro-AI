@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Jasper",
+    "url": "https://www.jasper.ai/",
+    "description": "AI-помощник для маркетинговых текстов, лендингов и email-кампаний.",
+    "category": "Генерация текста",
+    "pricing": "Фримиум",
+    "tags": ["копирайтинг", "email", "лендинги"]
+  },
+  {
+    "title": "SurferSEO",
+    "url": "https://surferseo.com/",
+    "description": "SEO-платформа для оптимизации контента и анализа поисковой выдачи.",
+    "category": "SEO",
+    "pricing": "Платно",
+    "tags": ["seo", "контент", "оптимизация"]
+  },
+  {
+    "title": "Pictory",
+    "url": "https://pictory.ai/",
+    "description": "Инструмент для превращения текста в короткие видео и ролики для соцсетей.",
+    "category": "Видео",
+    "pricing": "Пробный период",
+    "tags": ["video", "reels", "shorts"]
+  },
+  {
+    "title": "Midjourney",
+    "url": "https://www.midjourney.com/",
+    "description": "Генератор изображений для баннеров, обложек и креативов бренда.",
+    "category": "Изображения",
+    "pricing": "Платно",
+    "tags": ["design", "image generation", "creative"]
+  },
+  {
+    "title": "Copy.ai",
+    "url": "https://www.copy.ai/",
+    "description": "Генератор маркетингового контента для постов, писем и идей кампаний.",
+    "category": "Генерация текста",
+    "pricing": "Фримиум",
+    "tags": ["smm", "email", "brainstorm"]
+  }
+]

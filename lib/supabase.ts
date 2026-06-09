@@ -140,10 +140,10 @@ export function createSupabaseServerClient() {
       get(name: string) {
         return cookieStore.get(name)?.value;
       },
-      set(name: string, value: string, options: Parameters<typeof cookieStore.set>[1]) {
+      set(name: string, value: string, options: Parameters<ReturnType<typeof cookies>['set']>[0]) {
         cookieStore.set({ name, value, ...options });
       },
-      remove(name: string, options: Parameters<typeof cookieStore.delete>[1]) {
+      remove(name: string, options: Parameters<ReturnType<typeof cookies>['delete']>[0]) {
         cookieStore.delete({ name, ...options });
       },
     },
