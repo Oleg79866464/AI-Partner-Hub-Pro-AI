@@ -51,6 +51,7 @@ export function ToolCard({ tool }: { tool: ToolRow }) {
         <div className="mt-5 flex flex-wrap gap-2">
           <span className="rounded-full bg-slate-950 px-3 py-1 text-xs font-semibold text-white shadow-sm">{tool.pricing}</span>
           {tool.verified ? <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-900">✓ Проверено</span> : null}
+          {tool.featured ? <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-900">Рост конверсии</span> : null}
           <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">Score {score}/100</span>
         </div>
 
@@ -80,7 +81,7 @@ export function ToolCard({ tool }: { tool: ToolRow }) {
             className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-slate-950 via-slate-900 to-cyan-700 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-950/20 transition hover:-translate-y-0.5 hover:from-cyan-600 hover:to-indigo-600"
             prefetch={false}
           >
-            Перейти →
+            Перейти к AI
           </Link>
         </div>
       </div>

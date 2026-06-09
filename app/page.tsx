@@ -99,16 +99,19 @@ export default async function Home({ searchParams }: { searchParams: SearchParam
                   <p className="text-sm text-slate-300">В каталоге</p>
                   <p className="mt-2 text-3xl font-bold">{tools.length}</p>
                   <p className="mt-1 text-sm text-slate-300">AI tools для роста</p>
+                  <p className="mt-4 text-xs uppercase tracking-[0.2em] text-cyan-300">Свежая база • SEO-ready</p>
                 </div>
                 <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
                   <p className="text-sm text-slate-500">Рекомендовано</p>
                   <p className="mt-2 text-3xl font-bold text-slate-900">{totalFeatured}</p>
                   <p className="mt-1 text-sm text-slate-600">инструментов с высокой конверсией</p>
+                  <p className="mt-4 text-xs uppercase tracking-[0.2em] text-slate-500">Отобрано вручную</p>
                 </div>
                 <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
                   <p className="text-sm text-slate-500">Проверено</p>
                   <p className="mt-2 text-3xl font-bold text-slate-900">{totalVerified}</p>
                   <p className="mt-1 text-sm text-slate-600">с верификацией и партнёрками</p>
+                  <p className="mt-4 text-xs uppercase tracking-[0.2em] text-slate-500">Trust signal</p>
                 </div>
               </div>
             </div>
@@ -125,6 +128,9 @@ export default async function Home({ searchParams }: { searchParams: SearchParam
               <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-4">
                 <p className="text-xs uppercase tracking-[0.24em] text-slate-400">Главный CTA</p>
                 <p className="mt-2 text-lg font-semibold">Выбирайте AI-инструмент с понятной ценностью и высокой маржой.</p>
+                <a href="#catalog" className="mt-4 inline-flex items-center justify-center rounded-2xl bg-cyan-400 px-4 py-3 text-sm font-bold text-slate-950 transition hover:bg-cyan-300">
+                  Смотреть каталог
+                </a>
               </div>
             </aside>
           </div>
@@ -149,7 +155,7 @@ export default async function Home({ searchParams }: { searchParams: SearchParam
 
         {error ? <p className="mt-6 rounded-2xl bg-red-50 p-4 text-sm text-red-700">{error.message}</p> : null}
 
-        <section className="mt-10 space-y-5">
+        <section id="catalog" className="mt-10 space-y-5">
           <div className="grid gap-4 md:grid-cols-3">
             <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm"><p className="text-sm text-slate-500">Сейчас в каталоге</p><p className="mt-2 text-2xl font-bold">{tools.length}</p><p className="mt-1 text-sm text-slate-600">инструментов для роста контента</p></div>
             <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm"><p className="text-sm text-slate-500">Фокус</p><p className="mt-2 text-2xl font-bold">SEO + AI</p><p className="mt-1 text-sm text-slate-600">поиск, тексты, видео, креатив</p></div>
