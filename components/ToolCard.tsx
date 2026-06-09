@@ -8,6 +8,8 @@ function truncate(value: string, maxLength: number) {
 
 export function ToolCard({ tool }: { tool: ToolRow }) {
   const score = Math.min(100, Math.round(tool.click_count * (tool.featured ? 0.18 : 0.12) + tool.commission_rate * 100));
+  const commissionLabel = `${Math.round(tool.commission_rate * 100)}% RevShare`;
+  const primaryTag = tool.tags[0] ?? tool.category;
   const ldJson = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
@@ -24,7 +26,7 @@ export function ToolCard({ tool }: { tool: ToolRow }) {
   };
 
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-[2rem] border border-slate-200/80 bg-white/90 shadow-[0_24px_70px_-35px_rgba(15,23,42,0.4)] backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-cyan-200 hover:shadow-[0_32px_90px_-35px_rgba(8,145,178,0.35)]">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-[2rem] border border-slate-200/80 bg-white/95 shadow-[0_24px_70px_-35px_rgba(15,23,42,0.4)] backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-cyan-200 hover:shadow-[0_32px_90px_-35px_rgba(8,145,178,0.35)]">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
       <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-cyan-500 via-sky-500 to-indigo-500" />
       <div className="flex flex-1 flex-col p-6">
@@ -35,6 +37,7 @@ export function ToolCard({ tool }: { tool: ToolRow }) {
                 {tool.domain}
               </span>
               {tool.featured ? <span className="rounded-full bg-amber-100 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-amber-900">Топ выбор</span> : null}
+              <span className="rounded-full bg-cyan-50 px-3 py-1 text-[11px] font-semibold text-cyan-800 ring-1 ring-cyan-100">{primaryTag}</span>
             </div>
             <div>
               <h3 className="text-2xl font-black tracking-tight text-slate-950 transition group-hover:text-cyan-700">{tool.name}</h3>
@@ -46,12 +49,13 @@ export function ToolCard({ tool }: { tool: ToolRow }) {
           </span>
         </div>
 
-        <p className="mt-4 line-clamp-3 text-sm leading-7 text-slate-600">{truncate(tool.description, 185)}</p>
+        <p className="mt-4 line-clamp-3 text-sm leading-7 text-slate-600">{truncate(tool.description, 175)}</p>
 
         <div className="mt-5 flex flex-wrap gap-2">
           <span className="rounded-full bg-slate-950 px-3 py-1 text-xs font-semibold text-white shadow-sm">{tool.pricing}</span>
           {tool.verified ? <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-900">✓ Проверено</span> : null}
-          {tool.featured ? <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-900">Рост конверсии</span> : null}
+          {tool.featured ? <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-900">Лучший конверт</span> : null}
+          <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">{commissionLabel}</span>
           <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">Score {score}/100</span>
         </div>
 
@@ -75,13 +79,16 @@ export function ToolCard({ tool }: { tool: ToolRow }) {
         </div>
 
         <div className="mt-6 flex items-center justify-between gap-3 border-t border-slate-100 pt-4">
-          <span className="text-sm text-slate-500">Партнёрский редирект через /go</span>
+          <div>
+            <p className="text-sm font-semibold text-slate-900">Перейти к инструменту</p>
+            <p className="text-xs text-slate-500">Трекинг кликов через /go • affiliate-ready</p>
+          </div>
           <Link
             href={`/go/${tool.id}`}
             className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-slate-950 via-slate-900 to-cyan-700 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-950/20 transition hover:-translate-y-0.5 hover:from-cyan-600 hover:to-indigo-600"
             prefetch={false}
           >
-            Перейти к AI
+            Смотреть
           </Link>
         </div>
       </div>

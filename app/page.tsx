@@ -14,7 +14,7 @@ export async function generateMetadata({ searchParams }: { searchParams: SearchP
   const suffix = [search, category, pricing].filter(Boolean).join(' • ');
   const title = suffix ? `${suffix} | ${titleBase}` : titleBase;
   const description =
-    'Проверенные ИИ-инструменты для маркетинга, контента и SEO: генераторы текста, видео, изображений, аналитика и автоматизация с фильтрами по цене, категории и поисковому intent.';
+    'Проверенные нейросети для маркетинга, контента и SEO: генераторы текста, видео, изображений, аналитика и автоматизация. Каталог AI-сервисов с фильтрами по цене, категории и реальному поисковому intent. Подборка под запросы: ИИ для маркетолога, нейросети для контента, AI для SMM и генератор текста.';
 
   return {
     title,
@@ -80,17 +80,17 @@ export default async function Home({ searchParams }: { searchParams: SearchParam
             <div className="max-w-4xl">
               <div className="inline-flex items-center gap-2 rounded-full border border-cyan-200 bg-cyan-50 px-4 py-2 text-sm font-medium text-cyan-800 shadow-sm">
                 <span className="h-2 w-2 rounded-full bg-cyan-500" />
-                AI Catalog RU • каталог нейросетей для маркетинга
+                AI Catalog RU • premium-каталог нейросетей для роста выручки
               </div>
-              <h1 className="mt-5 max-w-3xl text-4xl font-black tracking-tight sm:text-5xl lg:text-6xl">Лучшие нейросети для маркетинга, SEO и контента</h1>
+              <h1 className="mt-5 max-w-4xl text-4xl font-black tracking-tight text-slate-950 sm:text-5xl lg:text-7xl">Нейросети для маркетинга и контента, которые выглядят как enterprise-выбор</h1>
               <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">
-                Каталог проверенных нейросетей для текста, видео, изображений, SEO, аналитики и автоматизации контента. Подборки для маркетологов, копирайтеров, SMM-специалистов и блогеров, которые ищут AI-сервисы с понятной окупаемостью, подписками $15–99/мес и реальной ценностью для роста.
+                Каталог AI-инструментов для маркетологов, копирайтеров, SEO-специалистов, SMM и блогеров: текст, видео, изображения, аналитика и автоматизация. Подбираем сервисы с сильным product-market fit, RevShare-потенциалом и понятной экономикой подписок $15–99/мес.
               </p>
               <div className="mt-8 flex flex-wrap gap-3 text-sm text-slate-700">
                 <span className="rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-slate-200">Партнёрские скидки</span>
-                <span className="rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-slate-200">Проверенные инструменты</span>
-                <span className="rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-slate-200">SEO + Performance</span>
-                <span className="rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-slate-200">AI для контента и трафика</span>
+                <span className="rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-slate-200">Проверенные AI-сервисы</span>
+                <span className="rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-slate-200">SEO-лендинги под RU-запросы</span>
+                <span className="rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-slate-200">ИИ для маркетолога</span>
                 <span className="rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-slate-200">RevShare вместо CPC</span>
                 <span className="rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-slate-200">Нейросети для маркетолога</span>
               </div>
@@ -118,12 +118,12 @@ export default async function Home({ searchParams }: { searchParams: SearchParam
 
             <aside className="rounded-[1.75rem] border border-slate-200 bg-slate-950 p-6 text-white shadow-2xl shadow-slate-950/30">
               <p className="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-300">Premium stack</p>
-              <h2 className="mt-3 text-2xl font-bold">Инструменты, которые продают подписки</h2>
+              <h2 className="mt-3 text-2xl font-bold">Каталог, который выглядит как high-trust B2B asset</h2>
               <ul className="mt-6 space-y-4 text-sm leading-6 text-slate-300">
-                <li>• Трафик из SEO под реальные запросы: «нейросети для маркетинга», «ИИ для копирайтинга», «AI для SMM», «лучшие AI-инструменты для контента».</li>
-                <li>• Фокус на RevShare-модели и подписках $15–99/мес, а не на устаревшем CPC.</li>
-                <li>• Трекинг кликов и UTM для оценки эффективности по каждому инструменту, категории и ключу.</li>
-                <li>• Подборки для текста, видео, изображений, аналитики, SEO и контент-воронок.</li>
+                <li>• SEO под частотные запросы: «нейросети для маркетинга», «ИИ для копирайтинга», «AI для SMM», «генератор текста», «нейросеть для видео», «инструменты для SEO».</li>
+                <li>• Ставка на RevShare и подписки $15–99/мес вместо устаревшего CPC и дешёвого кликового трафика.</li>
+                <li>• Трекинг кликов, UTM и категории дают понятную аналитику по каждому партнёрскому инструменту.</li>
+                <li>• Подборки закрывают intent по тексту, видео, изображениями, SEO, аналитике и автоматизации контента.</li>
               </ul>
               <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-4">
                 <p className="text-xs uppercase tracking-[0.24em] text-slate-400">Главный CTA</p>

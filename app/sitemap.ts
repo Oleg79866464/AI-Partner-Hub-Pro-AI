@@ -13,8 +13,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: 'daily' as const,
   };
 
-  const categories = [...new Set((data ?? []).map((tool) => tool.category))].map((category) => ({
-    url: `${siteUrl}/categories/${encodeURIComponent(category.toLowerCase().replace(/ё/g, 'е').replace(/[^a-z0-9а-я]+/gi, '-').replace(/^-+|-+$/g, ''))}`,
+  const categorySlugs = [...new Set((data ?? []).map((tool) => tool.category))].map((category) =>
+    category.toLowerCase().replace(/ё/g, 'е').replace(/[^a-z0-9а-я]+/gi, '-').replace(/^-+|-+$/g, ''),
+  );
+
+  const categories = categorySlugs.map((slug) => ({
+    url: `${siteUrl}/categories/${encodeURIComponent(slug)}`,
     lastModified,
     priority: 0.8,
     changeFrequency: 'weekly' as const,

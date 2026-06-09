@@ -61,7 +61,7 @@ def write_seed_sql(rows: list[dict[str, Any]], output_path: Path) -> None:
 
 
 def apply_seed_sql(sql_path: Path) -> int:
-    database_url = (parser_module.__dict__.get('os') or __import__('os')).environ.get('SUPABASE_DB_URL', '').strip()
+    database_url = __import__('os').environ.get('SUPABASE_DB_URL', '').strip()
     if not database_url:
         print('Missing SUPABASE_DB_URL for direct SQL seed execution', file=sys.stderr)
         return 1
@@ -71,8 +71,8 @@ def apply_seed_sql(sql_path: Path) -> int:
 
 
 def import_rows(rows: list[dict[str, Any]]) -> int:
-    supabase_url = (parser_module.__dict__.get('os') or __import__('os')).environ.get('NEXT_PUBLIC_SUPABASE_URL', '').strip()
-    service_key = (parser_module.__dict__.get('os') or __import__('os')).environ.get('SUPABASE_SERVICE_ROLE_KEY', '').strip()
+    supabase_url = __import__('os').environ.get('NEXT_PUBLIC_SUPABASE_URL', '').strip()
+    service_key = __import__('os').environ.get('SUPABASE_SERVICE_ROLE_KEY', '').strip()
     if not supabase_url or not service_key:
         print('Missing NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY', file=sys.stderr)
         return 1

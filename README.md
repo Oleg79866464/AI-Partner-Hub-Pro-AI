@@ -36,12 +36,13 @@ What this does:
 - writes `tools_clean.json`
 - generates `tools_clean.sql`
 - applies the SQL seed directly to Supabase via `psql` when `SUPABASE_DB_URL` is set
+- falls back to a readable SQL file you can run manually if needed
 
 ### 2. Supabase
 1. Create a Supabase project.
 2. Open the SQL editor.
 3. Run `db/schema.sql`.
-4. Copy `.env.example` to `.env.local` and set `SUPABASE_DB_URL` if you want one-command SQL seeding.
+4. Set `SUPABASE_DB_URL` in `.env.local` if you want one-command SQL seeding.
 
 If you prefer the Supabase SDK import path instead, use:
 ```bash
