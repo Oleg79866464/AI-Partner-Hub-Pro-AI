@@ -3,7 +3,11 @@ import { supabaseAdmin } from '@/lib/supabase';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://example.com';
-  const { data } = await supabaseAdmin.from('tools').select('slug,updated_at,category').order('updated_at', { ascending: false });
+  const { data, error } = await supabaseAdmin.from('tools').select('slug,updated_at,category').order('updated_at', { ascending: false });
+
+  if (error) {
+    console.error('Sitemap generation failed', error);
+  }
 
   const lastModified = data?.[0]?.updated_at ? new Date(data[0].updated_at) : new Date();
   const home = {

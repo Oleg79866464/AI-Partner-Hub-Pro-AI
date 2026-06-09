@@ -2,9 +2,10 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://example.com';
+const metadataBase = siteUrl.startsWith('http') ? new URL(siteUrl) : new URL('https://example.com');
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase,
   title: {
     default: 'AI Catalog RU',
     template: '%s | AI Catalog — нейросети для маркетинга',
