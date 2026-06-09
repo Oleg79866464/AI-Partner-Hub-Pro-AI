@@ -39,7 +39,7 @@ cd parser
 python3.11 -m venv venv
 source venv/bin/activate
 pip install pydantic==2.5.3 requests==2.31.0 beautifulsoup4==4.12.3 supabase==2.6.0
-python cli.py --input taaft.json --output tools_clean.json --errors parsing_errors.json --import
+python cli.py --input taaft.json --output tools_clean.json --errors parsing_errors.json --auto
 ```
 
 ### 2. Supabase
@@ -47,7 +47,7 @@ python cli.py --input taaft.json --output tools_clean.json --errors parsing_erro
 2. Open the SQL editor.
 3. Run `db/schema.sql`.
 4. Run the fully automatic workflow:
-   `python parser/cli.py --input taaft.json --output tools_clean.json --errors parsing_errors.json --import`
+   `python parser/cli.py --input taaft.json --output tools_clean.json --errors parsing_errors.json --auto`
 
 ### 3. Next.js
 ```bash

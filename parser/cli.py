@@ -28,8 +28,8 @@ def import_rows(rows: list[dict[str, Any]]) -> int:
 
     client = create_client(supabase_url, service_key)
     response = client.table('tools').upsert(rows, on_conflict='domain').execute()
-    inserted = len(response.data or [])
-    print(f'Imported {inserted} tools into Supabase')
+    affected = len(response.data or [])
+    print(f'Imported {affected} tools into Supabase')
     return 0
 
 
@@ -39,6 +39,7 @@ def main() -> int:
     cli.add_argument('--output', default='tools_clean.json', help='Output cleaned JSON file')
     cli.add_argument('--errors', default='parsing_errors.json', help='Parsing errors file')
     cli.add_argument('--import', dest='do_import', action='store_true', help='Import cleaned rows into Supabase')
+    cli.add_argument('--auto', action='store_true', help='Run parse + export + import in one command')
     cli.add_argument('--dry-run', action='store_true', help='Parse and print summary only')
     args = cli.parse_args()
 
@@ -52,7 +53,7 @@ def main() -> int:
     print(f'Clean tools: {len(clean_rows)}')
     if args.dry_run:
         return 0
-    if args.do_import:
+    if args.do_import or args.auto:
         return import_rows(clean_rows)
     return 0
 
