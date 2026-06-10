@@ -7,8 +7,8 @@ function getDeviceType(userAgent: string | null) {
   return 'desktop';
 }
 
-export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
+export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+  const { id } = params;
   const toolId = Number(id);
 
   if (!Number.isFinite(toolId)) {
@@ -21,7 +21,8 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     return NextResponse.redirect(new URL('/', request.url), { status: 302 });
   }
 
-  const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? request.headers.get('x-real-ip');
+  const forwardedFor = request.headers.get('x-forwarded-for');
+  const ip = forwardedFor?.split(',')[0]?.trim() ?? request.headers.get('x-real-ip');
   const userAgent = request.headers.get('user-agent');
   const referer = request.headers.get('referer') ?? '';
   const url = new URL(request.url);
@@ -31,7 +32,12 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     tool_id: tool.id,
     ip: ip ?? null,
     user_agent: userAgent,
-    country: request.headers.get('x-vercel-ip-country') ?? request.headers.get('cf-ipcountry') ?? null,
+    country:
+      request.headers.get('x-vercel-ip-country') ??
+      request.headers.get('cf-ipcountry') ??
+      request.headers.get('x-country') ??
+      request.headers.get('x-vercel-ip-country-region') ??
+      null,
     device_type,
     utm_source: url.searchParams.get('utm_source') ?? request.headers.get('utm_source') ?? null,
     utm_medium: url.searchParams.get('utm_medium') ?? null,

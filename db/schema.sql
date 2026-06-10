@@ -48,6 +48,7 @@ create table if not exists public.clicks (
   tool_id bigint not null references public.tools(id) on delete cascade,
   ip inet,
   user_agent text,
+  referer text,
   country text,
   device_type text,
   utm_source text,
