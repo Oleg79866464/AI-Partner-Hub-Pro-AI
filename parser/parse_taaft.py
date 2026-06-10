@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 import re
-from dataclasses import dataclass, asdict
+from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
@@ -11,7 +11,6 @@ ROOT = Path(__file__).resolve().parent
 INPUT_FILE = ROOT.parent / 'taaft.json'
 OUTPUT_FILE = ROOT.parent / 'ai-tools-clean.json'
 ERROR_FILE = ROOT.parent / 'parsing_errors.json'
-
 AFFILIATE_SUFFIX = '?ref=ai_curator_2026&utm_source=web&utm_medium=catalog'
 
 
@@ -50,26 +49,29 @@ def normalize_pricing(text: str) -> str:
     raw = strip_markdown(text).lower()
     if not raw:
         return 'Платно'
-    if '100% free' in raw or raw in {'free', 'бесплатно'} or 'free' == raw.strip():
+    if '100% free' in raw or raw in {'free', 'бесплатно'}:
         return '100% Free'
-    if 'freemium' in raw or 'free +' in raw or 'from $' in raw or 'starting at $' in raw:
+    if 'freemium' in raw:
+        return 'Фримиум'
+    if 'free +' in raw or 'from $' in raw or 'starting at $' in raw:
         money = re.search(r'\$\s*\d+(?:[.,]\d+)?(?:\s*/\s*mo|\s*/\s*month|\s*mo|\s*month)?', raw)
         if money:
             price = money.group(0).replace(' ', '')
             price = price.replace('/month', '/mo').replace('month', 'mo')
-            if not price.endswith('/mo') and '/mo' not in price:
-                price = price.replace('mo', '/mo') if price.endswith('mo') else price
-            if price.startswith('$'):
-                return f'From {price}' if 'from' in raw or 'free +' in raw else f'Freemium, From {price}'
-        return 'Freemium'
+            if not price.endswith('/mo') and '/mo' not in price and price.endswith('mo'):
+                price = price[:-2] + '/mo'
+            if raw.startswith('free +') or 'free +' in raw:
+                return f'Freemium, From {price}'
+            return f'From {price}'
+        return 'Фримиум'
     if 'trial' in raw or 'demo' in raw or 'проб' in raw:
-        return 'Trial'
+        return 'Пробный период'
     money = re.search(r'\$\s*\d+(?:[.,]\d+)?(?:\s*/\s*mo|\s*/\s*month|\s*mo|\s*month)?', raw)
     if money:
         price = money.group(0).replace(' ', '')
         price = price.replace('/month', '/mo').replace('month', 'mo')
-        if not price.endswith('/mo') and '/mo' not in price:
-            price = price.replace('mo', '/mo') if price.endswith('mo') else price
+        if not price.endswith('/mo') and '/mo' not in price and price.endswith('mo'):
+            price = price[:-2] + '/mo'
         return f'From {price}'
     return 'Платно'
 
@@ -78,14 +80,6 @@ def slugify_domain(url: str) -> str:
     parsed = urlparse(url)
     host = parsed.netloc.lower().removeprefix('www.')
     return host
-
-
-def unique_preserve(items: list[str]) -> list[str]:
-    out: list[str] = []
-    for item in items:
-        if item and item not in out:
-            out.append(item)
-    return out
 
 
 def parse_block(block: str, index: int) -> ToolItem:
@@ -99,27 +93,20 @@ def parse_block(block: str, index: int) -> ToolItem:
     category = strip_markdown(links[-2][0].strip())
     pricing = normalize_pricing(links[-1][0].strip())
 
-    between = block
-    first_link = between.find('](')
-    last_link = between.rfind('](')
-    description_source = between[first_link + 2:last_link] if first_link != -1 and last_link != -1 and last_link > first_link else block
-    description = clean_description(description_source)
-
-    if not description:
-        before_category = re.split(r'\[(.*?)\]\((.*?)\)[^\[]*$', block)[0]
-        description = clean_description(before_category)
-
-    affiliate_url = f'{url}{AFFILIATE_SUFFIX}'
-    tool_id = f'tool_{index}'
+    description = clean_description(block)
+    if len(links) >= 1:
+        first_url = block.find(f']({links[0][1].strip()})')
+        if first_url != -1:
+            description = clean_description(block[first_url + len(links[0][1].strip()) + 3:]) or description
 
     return ToolItem(
-        id=tool_id,
+        id=f'tool_{index}',
         name=name,
         description=description,
         category=category or 'Uncategorized',
         pricing=pricing,
         url=url,
-        affiliate_url=affiliate_url,
+        affiliate_url=f'{url}{AFFILIATE_SUFFIX}',
         icon=icon,
     )
 
