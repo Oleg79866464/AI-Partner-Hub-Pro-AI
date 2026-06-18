@@ -14,7 +14,7 @@ export async function generateMetadata({ searchParams }: { searchParams: SearchP
   const suffix = [search, category, pricing].filter(Boolean).join(' • ');
   const title = suffix ? `${suffix} | ${titleBase}` : titleBase;
   const description =
-    'Проверенные ИИ-инструменты для создания контента, SEO и performance-маркетинга. Найдите нейросети для текста, видео, изображений и аналитики с фильтрами по цене и категории.';
+    'Проверенные нейросети для маркетинга, контента и SEO: генераторы текста, видео, изображений, аналитика и автоматизация. Каталог AI-сервисов с фильтрами по цене, категории и реальному поисковому intent. Подборка под запросы: ИИ для маркетолога, нейросети для контента, AI для SMM, генератор текста, инструменты для SEO и AI для контент-маркетинга.';
 
   return {
     title,
@@ -80,49 +80,58 @@ export default async function Home({ searchParams }: { searchParams: SearchParam
             <div className="max-w-4xl">
               <div className="inline-flex items-center gap-2 rounded-full border border-cyan-200 bg-cyan-50 px-4 py-2 text-sm font-medium text-cyan-800 shadow-sm">
                 <span className="h-2 w-2 rounded-full bg-cyan-500" />
-                AI Catalog RU • каталог нейросетей для маркетинга
+                AI Catalog RU • premium-каталог нейросетей для роста выручки
               </div>
-              <h1 className="mt-5 max-w-3xl text-4xl font-black tracking-tight sm:text-5xl lg:text-6xl">Найти ИИ-инструмент для маркетинга и контента</h1>
+              <h1 className="mt-5 max-w-4xl text-4xl font-black tracking-tight text-slate-950 sm:text-5xl lg:text-7xl">Нейросети для маркетинга и контента, которые продают, а не просто выглядят красиво</h1>
               <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">
-                Каталог проверенных нейросетей для текста, видео, изображений, SEO, аналитики и автоматизации контента. Подборки для маркетологов, копирайтеров, SMM-специалистов и блогеров, которым важен ROI.
+                Каталог AI-инструментов для маркетологов, копирайтеров, SEO-специалистов, SMM и блогеров: текст, видео, изображения, аналитика и автоматизация. Подбираем сервисы с сильным product-market fit, RevShare-потенциалом и понятной экономикой подписок $15–99/мес. Отдельно усиливаем посадочные под запросы «нейросети для маркетинга», «ИИ для копирайтинга», «AI для SMM» и «инструменты для SEO».
               </p>
               <div className="mt-8 flex flex-wrap gap-3 text-sm text-slate-700">
                 <span className="rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-slate-200">Партнёрские скидки</span>
-                <span className="rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-slate-200">Проверенные инструменты</span>
-                <span className="rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-slate-200">SEO + Performance</span>
+                <span className="rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-slate-200">Проверенные AI-сервисы</span>
+                <span className="rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-slate-200">SEO-лендинги под RU-запросы</span>
+                <span className="rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-slate-200">ИИ для маркетолога</span>
                 <span className="rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-slate-200">RevShare вместо CPC</span>
+                <span className="rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-slate-200">Высокий intent трафик</span>
+                <span className="rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-slate-200">Нейросети для маркетолога</span>
               </div>
               <div className="mt-8 grid gap-4 sm:grid-cols-3">
                 <div className="rounded-3xl border border-slate-200 bg-slate-950 p-5 text-white shadow-lg shadow-slate-950/20">
                   <p className="text-sm text-slate-300">В каталоге</p>
                   <p className="mt-2 text-3xl font-bold">{tools.length}</p>
-                  <p className="mt-1 text-sm text-slate-300">AI tools для роста</p>
+                  <p className="mt-1 text-sm text-slate-300">AI tools для роста, лидов и affiliate revenue</p>
+                  <p className="mt-4 text-xs uppercase tracking-[0.2em] text-cyan-300">Свежая база • SEO-ready</p>
                 </div>
                 <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
                   <p className="text-sm text-slate-500">Рекомендовано</p>
                   <p className="mt-2 text-3xl font-bold text-slate-900">{totalFeatured}</p>
-                  <p className="mt-1 text-sm text-slate-600">инструментов с высокой конверсией</p>
+                  <p className="mt-1 text-sm text-slate-600">инструментов с высокой конверсией и понятной монетизацией</p>
+                  <p className="mt-4 text-xs uppercase tracking-[0.2em] text-slate-500">Отобрано вручную</p>
                 </div>
                 <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
                   <p className="text-sm text-slate-500">Проверено</p>
                   <p className="mt-2 text-3xl font-bold text-slate-900">{totalVerified}</p>
                   <p className="mt-1 text-sm text-slate-600">с верификацией и партнёрками</p>
+                  <p className="mt-4 text-xs uppercase tracking-[0.2em] text-slate-500">Trust signal</p>
                 </div>
               </div>
             </div>
 
             <aside className="rounded-[1.75rem] border border-slate-200 bg-slate-950 p-6 text-white shadow-2xl shadow-slate-950/30">
               <p className="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-300">Premium stack</p>
-              <h2 className="mt-3 text-2xl font-bold">Инструменты, которые продают подписки</h2>
+              <h2 className="mt-3 text-2xl font-bold">Каталог, который выглядит как high-trust B2B asset</h2>
               <ul className="mt-6 space-y-4 text-sm leading-6 text-slate-300">
-                <li>• Трафик из SEO под реальные запросы: «нейросети для маркетинга», «ИИ для копирайтинга», «AI для SMM».</li>
-                <li>• Фокус на RevShare-модели и подписках $15–99/мес.</li>
-                <li>• Трекинг кликов и UTM для оценки эффективности по каждому инструменту.</li>
-                <li>• Подборки для текста, видео, изображений, аналитики и SEO.</li>
+                <li>• SEO под частотные запросы: «нейросети для маркетинга», «ИИ для копирайтинга», «AI для SMM», «генератор текста», «нейросеть для видео», «инструменты для SEO», «каталог нейросетей».</li>
+                <li>• Ставка на RevShare и подписки $15–99/мес вместо устаревшего CPC и дешёвого кликового трафика.</li>
+                <li>• Трекинг кликов, UTM и категории дают понятную аналитику по каждому партнёрскому инструменту.</li>
+                <li>• Подборки закрывают intent по тексту, видео, изображениям, SEO, аналитике и автоматизации контента.</li>
               </ul>
               <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-4">
                 <p className="text-xs uppercase tracking-[0.24em] text-slate-400">Главный CTA</p>
                 <p className="mt-2 text-lg font-semibold">Выбирайте AI-инструмент с понятной ценностью и высокой маржой.</p>
+                <a href="#catalog" className="mt-4 inline-flex items-center justify-center rounded-2xl bg-cyan-400 px-4 py-3 text-sm font-bold text-slate-950 transition hover:bg-cyan-300">
+                  Смотреть каталог
+                </a>
               </div>
             </aside>
           </div>
@@ -147,8 +156,27 @@ export default async function Home({ searchParams }: { searchParams: SearchParam
 
         {error ? <p className="mt-6 rounded-2xl bg-red-50 p-4 text-sm text-red-700">{error.message}</p> : null}
 
-        <section className="mt-10 space-y-5">
+        <section className="mt-10 rounded-[1.75rem] border border-slate-200/80 bg-white/90 p-5 shadow-[0_20px_60px_-20px_rgba(15,23,42,0.12)] backdrop-blur">
           <div className="grid gap-4 md:grid-cols-3">
+            <div className="rounded-3xl border border-cyan-100 bg-cyan-50 p-5">
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-700">Trust</p>
+              <p className="mt-2 text-xl font-bold text-slate-950">Проверенные карточки</p>
+              <p className="mt-1 text-sm text-slate-600">Публикуем только инструменты с понятным value prop, ценой и каналом монетизации.</p>
+            </div>
+            <div className="rounded-3xl border border-amber-100 bg-amber-50 p-5">
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-amber-700">Benefits</p>
+              <p className="mt-2 text-xl font-bold text-slate-950">Сильный intent match</p>
+              <p className="mt-1 text-sm text-slate-600">Категории и SEO-лендинги собраны под запросы маркетологов, копирайтеров и SMM.</p>
+            </div>
+            <div className="rounded-3xl border border-emerald-100 bg-emerald-50 p-5">
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-emerald-700">Revenue</p>
+              <p className="mt-2 text-xl font-bold text-slate-950">RevShare-first модель</p>
+              <p className="mt-1 text-sm text-slate-600">Ставим партнёрские продукты и commission rate выше кликового мусора.</p>
+            </div>
+          </div>
+
+          <div id="catalog" className="mt-8 space-y-5">
+            <div className="grid gap-4 md:grid-cols-3">
             <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm"><p className="text-sm text-slate-500">Сейчас в каталоге</p><p className="mt-2 text-2xl font-bold">{tools.length}</p><p className="mt-1 text-sm text-slate-600">инструментов для роста контента</p></div>
             <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm"><p className="text-sm text-slate-500">Фокус</p><p className="mt-2 text-2xl font-bold">SEO + AI</p><p className="mt-1 text-sm text-slate-600">поиск, тексты, видео, креатив</p></div>
             <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm"><p className="text-sm text-slate-500">Монетизация</p><p className="mt-2 text-2xl font-bold">RevShare</p><p className="mt-1 text-sm text-slate-600">а не устаревший CPC</p></div>

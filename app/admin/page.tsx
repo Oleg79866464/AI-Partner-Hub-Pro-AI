@@ -104,6 +104,7 @@ export default async function AdminPage({ searchParams }: { searchParams: { [key
                 <div className="rounded-2xl bg-slate-50 p-4">Mobile: {deviceBreakdown.mobile}</div>
                 <div className="rounded-2xl bg-slate-50 p-4">Desktop: {deviceBreakdown.desktop}</div>
               </div>
+              <p className="mt-4 text-xs leading-6 text-slate-500">Country считывается из серверных headers Cloudflare/Vercel, а если их нет — отображается как unknown, чтобы не терять клики.</p>
             </div>
 
             <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
